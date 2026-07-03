@@ -1,0 +1,398 @@
+/* Premium editorial dark theme inspired by charity: water branding elements */
+body {
+    background-color: #171516;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: #ffffff;
+    user-select: none;
+    letter-spacing: -0.01em;
+    overflow-x: hidden;
+}
+
+/* Fluid main container card with responsive width controls */
+.game-outer-container {
+    background-color: #231f20;
+    border: 1px solid #332f30;
+    border-radius: 16px;
+    padding: 20px;
+    max-width: 460px;
+    width: 100%;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    box-sizing: border-box;
+}
+
+@media (min-width: 576px) {
+    .game-outer-container {
+        padding: 32px;
+    }
+}
+
+/* Scalable header heading text */
+.game-header {
+    font-size: 1.25rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #ffffff;
+}
+
+@media (min-width: 576px) {
+    .game-header {
+        font-size: 1.5rem;
+    }
+}
+
+/* Deep navy/slate responsive puzzle enclosure box */
+.game-board-area {
+    background-color: #1a222d;
+    border-radius: 12px;
+    padding: 12px;
+    border: 1px solid #253344;
+}
+
+@media (min-width: 576px) {
+    .game-board-area {
+        padding: 24px;
+    }
+}
+
+.game-badge-timer {
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #a0aec0;
+}
+
+/* Dynamic CSS Grid map configuration layout tracking */
+.game-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin: 10px 0;
+    justify-items: center;
+    align-items: center;
+    width: 100%;
+}
+
+@media (min-width: 576px) {
+    .game-grid {
+        gap: 12px;
+    }
+}
+
+/* Dynamic external layout grid coordinate placeholders */
+.grid-external-node,
+.grid-spacer-cell {
+    width: 100%;
+    max-width: 76px;
+    height: auto;
+    aspect-ratio: 4 / 2.8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Fluid, responsive grid tile interfaces using auto aspect-ratios */
+.pipe-tile {
+    width: 100%;
+    max-width: 76px;
+    aspect-ratio: 1 / 1;
+    background-color: #232d3a;
+    border: 1px solid #2d3d52;
+    border-radius: 8px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.15s ease, border-color 0.2s, background-color 0.2s;
+}
+
+.pipe-tile:hover {
+    border-color: #4a5d78;
+    background-color: #293545;
+}
+
+.pipe-tile:active {
+    transform: scale(0.94);
+}
+
+.pipe-tile.flow-active {
+    border-color: #2e9df7;
+    background-color: #1e2936;
+}
+
+.pipe-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Percentage-based relative pipe line scaling measurements */
+.pipe-segment {
+    position: absolute;
+    background-color: #4a5568;
+    z-index: 2;
+    transition: background-color 0.3s;
+}
+
+/* Horizontal linear path alignments */
+.straight .pipe-segment {
+    width: 100%;
+    height: 20%;
+    left: 0;
+    top: 40%;
+}
+
+/* Angular corner path specifications */
+.corner .pipe-seg-v {
+    width: 20%;
+    height: 50%;
+    left: 40%;
+    top: 0;
+}
+
+.corner .pipe-seg-h {
+    width: 50%;
+    height: 20%;
+    right: 0;
+    top: 40%;
+}
+
+.corner .pipe-joint {
+    position: absolute;
+    width: 20%;
+    height: 20%;
+    left: 40%;
+    top: 40%;
+    background-color: #4a5568;
+    z-index: 3;
+    transition: background-color 0.3s;
+}
+
+/* Relative core water fluid mapping structures */
+.water-fluid {
+    position: absolute;
+    background-color: transparent;
+    z-index: 4;
+    transition: background-color 0.25s ease;
+}
+
+.straight .water-fluid {
+    width: 100%;
+    height: 10%;
+    left: 0;
+    top: 45%;
+}
+
+.corner .fluid-v {
+    width: 10%;
+    height: 50%;
+    left: 45%;
+    top: 0;
+}
+
+.corner .fluid-h {
+    width: 50%;
+    height: 10%;
+    right: 0;
+    top: 45%;
+}
+
+.flow-active .pipe-segment,
+.flow-active .pipe-joint {
+    background-color: #2b3d54;
+}
+
+.flow-active .water-fluid {
+    background-color: #2e9df7;
+    box-shadow: 0 0 8px rgba(46, 157, 247, 0.6);
+}
+
+/* Icons auto-scale smoothly depending on available grid area boundaries */
+.start-node {
+    color: #2e9df7;
+    filter: drop-shadow(0 0 6px rgba(46, 157, 247, 0.5));
+    font-size: calc(1.1rem + 1vw);
+    animation: pulseGlow 2s infinite ease-in-out;
+}
+
+.game-badge-finish {
+    color: #4a5568;
+    font-size: calc(1.1rem + 1vw);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.game-badge-finish.active {
+    color: #2e9df7;
+    filter: drop-shadow(0 0 10px rgba(46, 157, 247, 0.8));
+    transform: scale(1.15);
+}
+
+@keyframes pulseGlow {
+    0% { transform: scale(1); filter: drop-shadow(0 0 4px rgba(46, 157, 247, 0.4)); }
+    50% { transform: scale(1.06); filter: drop-shadow(0 0 10px rgba(46, 157, 247, 0.7)); }
+    100% { transform: scale(1); filter: drop-shadow(0 0 4px rgba(46, 157, 247, 0.4)); }
+}
+
+/* Control buttons adjustments */
+.btn-control {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 10px 12px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    border: none;
+}
+
+@media (min-width: 576px) {
+    .btn-control {
+        font-size: 0.85rem;
+        padding: 12px 16px;
+    }
+}
+
+.btn-restart { background-color: #ffffff; color: #231f20; }
+.btn-restart:hover { background-color: #e2e8f0; }
+.btn-home { background-color: #2d3748; color: #a0aec0; }
+.btn-home:hover { background-color: #4a5568; color: #ffffff; }
+
+/* Responsive Victory Screen Modal Overlays */
+.win-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(11, 10, 11, 0.85);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+
+.win-modal-overlay.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.win-modal-card {
+    background-color: #231f20;
+    border: 1px solid #332f30;
+    border-radius: 20px;
+    padding: 30px 20px;
+    max-width: 380px;
+    width: 88%;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+    transform: scale(0.85);
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-sizing: border-box;
+}
+
+@media (min-width: 576px) {
+    .win-modal-card {
+        padding: 40px 32px;
+    }
+}
+
+.win-modal-overlay.visible .win-modal-card {
+    transform: scale(1);
+}
+
+.win-icon-badge {
+    width: 60px;
+    height: 60px;
+    background-color: rgba(46, 157, 247, 0.1);
+    color: #2e9df7;
+    border: 2px solid #2e9df7;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.65rem;
+    filter: drop-shadow(0 0 12px rgba(46, 157, 247, 0.5));
+}
+
+@media (min-width: 576px) {
+    .win-icon-badge {
+        width: 72px;
+        height: 72px;
+        font-size: 2rem;
+    }
+}
+
+.win-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #ffffff;
+}
+
+@media (min-width: 576px) {
+    .win-title {
+        font-size: 1.8rem;
+    }
+}
+
+.win-subtitle {
+    font-size: 0.85rem;
+    color: #a0aec0;
+    line-height: 1.4;
+}
+
+@media (min-width: 576px) {
+    .win-subtitle {
+        font-size: 0.95rem;
+        line-height: 1.5;
+    }
+}
+
+.win-stats-box {
+    background-color: #1a222d;
+    border: 1px solid #253344;
+    border-radius: 12px;
+    padding: 10px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+
+@media (min-width: 576px) {
+    .win-stats-box {
+        padding: 14px 20px;
+        gap: 4px;
+    }
+}
+
+.stats-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #718096;
+}
+
+.stats-value {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: #2e9df7;
+    text-shadow: 0 0 10px rgba(46, 157, 247, 0.3);
+}
+
+@media (min-width: 576px) {
+    .stats-value {
+        font-size: 1.6rem;
+    }
+}
+
+.pipe-rim {
+    display: none !important;
+}
