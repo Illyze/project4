@@ -1,0 +1,307 @@
+/* Set background color to blue */
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: rgb(10, 10, 80);
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+body.no-scroll {
+  overflow: hidden;
+  height: 100vh;
+}
+
+/* Header as centered container */
+header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 50vh;
+  padding: 0px 0px 0px;
+  gap: 36px;
+  perspective: 1400px;
+  background: radial-gradient(circle at top, rgba(37, 109, 210, 0.20), transparent 22%),
+              linear-gradient(180deg, #4276e7 0%, #1866f5 42%, #103a94 100%);
+}
+
+.hero-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  max-width: 920px;
+  gap: 18px;
+  padding: 0px;
+}
+
+.hero-logo {
+  max-width: 220px;
+  width: 100%;
+}
+
+.cube-section {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 170px 24px 300px;
+  perspective: 1400px;
+}
+
+.flip-card {
+  width: 100%;
+  max-width: 600px;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  min-height: 440px;
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease-out;
+}
+
+/* Main card styling */
+.flip-card-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 50px;
+
+  padding: 70px 60px;
+  border-radius: 20px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .5s ease;
+
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+
+  transform-style: preserve-3d;
+  will-change: transform;
+  overflow: hidden;
+
+  /* GPU acceleration */
+  transform: translateZ(0);
+
+  background:
+  radial-gradient(
+      circle at center,
+      rgba(22,55,120,.92) 0%,
+      rgba(7,31,83,.98) 120%
+  ),
+  linear-gradient(
+      135deg,
+      rgba(12,33,94,.98),
+      rgba(2,27,97,.95)
+  );
+
+  /* stable shadow */
+  box-shadow:
+      inset 0 0 60px rgba(0,12,40,.55),
+      0 0 40px rgba(24,174,224,.35),
+      0 0 80px rgba(111,35,211,.25),
+      0 0 120px rgba(123,31,234,.20);
+}
+
+
+/* visible state */
+.flip-card-back.visible{
+  opacity:1;
+  visibility:visible;
+}
+
+/* Flip direction changed: bottom → top */
+/* Mobile first (vertical) */
+.flip-card-back.card-stage-0 { transform: rotateX(0deg) translateZ(260px); }
+.flip-card-back.card-stage-1 { transform: rotateX(-40deg) translateZ(260px); }
+.flip-card-back.card-stage-2 { transform: rotateX(-80deg) translateZ(260px); }
+.flip-card-back.card-stage-3 { transform: rotateX(-120deg) translateZ(260px); }
+.flip-card-back.card-stage-4 { transform: rotateX(-160deg) translateZ(260px); }
+.flip-card-back.card-stage-5 { transform: rotateX(-200deg) translateZ(260px); }
+.flip-card-back.card-stage-6 { transform: rotateX(-240deg) translateZ(260px); }
+.flip-card-back.card-stage-7 { transform: rotateX(-280deg) translateZ(260px); }
+.flip-card-back.card-stage-8 { transform: rotateX(-320deg) translateZ(260px); }
+
+
+/* Desktop = horizontal */
+@media (min-width:769px){
+
+.flip-card-back.card-stage-0 { transform: rotateY(0deg) translateZ(260px); }
+.flip-card-back.card-stage-1 { transform: rotateY(40deg) translateZ(260px); }
+.flip-card-back.card-stage-2 { transform: rotateY(80deg) translateZ(260px); }
+.flip-card-back.card-stage-3 { transform: rotateY(120deg) translateZ(260px); }
+.flip-card-back.card-stage-4 { transform: rotateY(160deg) translateZ(260px); }
+.flip-card-back.card-stage-5 { transform: rotateY(200deg) translateZ(260px); }
+.flip-card-back.card-stage-6 { transform: rotateY(240deg) translateZ(260px); }
+.flip-card-back.card-stage-7 { transform: rotateY(280deg) translateZ(260px); }
+.flip-card-back.card-stage-8 { transform: rotateY(320deg) translateZ(260px); }
+
+}
+
+.flip-card-front img,
+.flip-card-back img {
+  width: 100%;
+  max-width: 100%;
+  max-height: 260px;
+  object-fit: cover;
+  display: block;
+  margin-bottom: 40px;
+  box-shadow: 0 0 70px rgba(123, 198, 255, 0.75), inset 0 0 24px rgba(123, 198, 255, 0.50);
+  border-radius: 18px;
+}
+
+.flip-card-back.card-stage-1,
+.flip-card-back.card-stage-2 {
+  box-shadow: -40px 40px 140px rgba(24, 174, 224, 0.512), -40px -40px 120px rgba(111, 35, 211, 0.512), 40px 40px 120px rgba(115, 44, 143, 0.505), 40px -40px 100px rgba(123, 31, 234, 0.512);
+}
+
+.flip-card-back h2 {
+  margin: 16px 0;
+  color: #e7f1f8;
+}
+.flip-card-back h3 {
+  margin: 16px 0;
+  color: #e2dddd;
+}
+
+.flip-card-back p {
+  color: rgba(255,255,255,0.88);
+}
+
+/* Resize and style the Intel logo */
+header div img {
+  max-width: 250px;
+  height: auto;
+  margin-bottom: 40px;
+}
+
+/* --- Intel Color Palette & Responsive Typography --- */
+
+:root {
+  /* Dynamic font sizes: clamp(MIN, PREFERRED, MAX) */
+  /* This smoothly scales text between mobile and desktop viewport widths */
+  --fs-hero-title: clamp(2rem, 5vw, 3.5rem);
+  --fs-hero-subtitle: clamp(1rem, 2vw, 1.25rem);
+  --fs-card-year: clamp(2rem, 4vw, 2.75rem);
+  --fs-card-title: clamp(1.2rem, 2.5vw, 1.5rem);
+  --fs-card-body: clamp(0.875rem, 1.5vw, 1rem); /* 14px to 16px */
+}
+
+/* Header fonts */
+h1, h2, h3, h4, h5, h6 {
+  font-family: intel-one-display-medium, Helvetica, Arial, sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.02em; /* Tight, premium tech branding feel */
+  line-height: 1.2;
+}
+
+/* Paragraph fonts */
+p {
+  font-family: intel-one-body-text, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+}
+
+/* Main Hero Typography */
+header h1 {
+  font-size: var(--fs-hero-title);
+  color: #FFFFFF; /* Pure white for high-contrast on deep blue */
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+  margin-bottom: 8px;
+}
+
+.hero-subtitle {
+  font-size: var(--fs-hero-subtitle);
+  color: #CCECFF; /* Soft digital ice-blue accent */
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+/* 3D Flip Card Typography */
+.flip-card-back h2 {
+  font-size: var(--fs-card-year);
+  color: #00C4FF; /* Intel Digital Cyan/Electric Accent Blue */
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  margin: 12px 0 4px;
+}
+
+.flip-card-back h3 {
+  font-size: var(--fs-card-title);
+  color: #FFFFFF; /* Clean white for headers */
+  font-weight: 500;
+  margin: 0 0 12px;
+}
+
+/* Base Card Description */
+.card-description {
+  font-size: var(--fs-card-body);
+  color: #E2EEF8; /* Slate-tinted crisp readable off-white */
+}
+
+/* Mobile-Specific Tweaks (Under 768px wide devices) */
+@media (max-width: 768px) {
+  header {
+    min-height: 40vh; /* Pulls up header height slightly on phone screens */
+    padding: 30px 16px;
+  }
+  
+  .flip-card-back {
+    padding: 40px 24px; /* Shrings oversized padding so content doesn't overflow mobile cards */
+  }
+  
+  .flip-card-back img {
+    max-height: 180px; /* Scales down image footprint inside smaller mobile viewports */
+    margin-bottom: 20px;
+  }
+}
+
+/* Hidden by default */
+.card-description {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+
+    margin-top: 0;
+
+    font-size: 15px;
+    line-height: 1.6;
+
+    transform: translateY(15px);
+
+    transition:
+        opacity .4s ease,
+        transform .4s ease,
+        max-height .4s ease,
+        margin-top .4s ease;
+}
+
+/* Show only when active card is hovered */
+.flip-card-back.visible:hover .card-description {
+    max-height: 150px;
+    opacity: 1;
+
+    margin-top: 20px;
+
+    transform: translateY(0);
+}

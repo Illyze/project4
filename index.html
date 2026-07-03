@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Intel: Sustainability Through the Ages</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Header / Hero Section -->
+  <header>
+    <div class="hero-top">
+      <img src="img/intel-header-logo.svg" alt="Intel Logo" class="hero-logo" />
+      <h1>Sustainability Through the Ages</h1>
+      <p class="hero-subtitle">Explore Intel's journey through time, discovering how our commitment to innovation has shaped a more sustainable future for technology and our planet.</p>
+    </div>
+  </header>
+  <div class="cube-section">
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <div class="flip-card-back card-stage-0">
+          <img src="img/1.jpg" alt="1968" />
+          <h2>1968</h2>
+          <h3>Intel Founded</h3>
+          <p class="card-description">
+        Robert Noyce and Gordon Moore rename the newly formed company 
+        NM Electronics to Intel Corporation, laying the foundation for 
+        decades of technological innovation.</p>
+        </div>
+        <div class="flip-card-back card-stage-1">
+          <img src="img/2.jpg" alt="1971" />
+          <h2>1971</h2>
+          <h3>First Microprocessor</h3>
+          <p class="card-description">
+            Intel debuts the 4004, the world's first commercial microprocessor, 
+        igniting the microprocessor revolution and propelling the future 
+        of computing devices.
+          </p>
+        </div>
+        <div class="flip-card-back card-stage-2">
+          <img src="img/3.jpg" alt="1978" />
+          <h2>1978</h2>
+          <h3>8086 Processor</h3>
+          <p class="card-description">
+            Launch of the 8086 processor, establishing the x86 architecture 
+        that drives countless PCs and servers in the modern era.
+        </div>
+        <div class="flip-card-back card-stage-3">
+          <img src="img/4.jpg" alt="1985" />
+          <h2>1985</h2>
+          <h3>386 Processor</h3>
+          <p class="card-description">
+           Intel introduces the 386 processor with 32-bit architecture, 
+        ushering in a new era of performance and multitasking for 
+        personal computers.</p>
+        </div>
+        <div class="flip-card-back card-stage-4">
+          <img src="img/emissions.jpg" alt="2006" />
+          <h2>2006</h2>
+          <h3>Peak GHG Emissions</h3>
+          <p class="card-description">
+            This year marks Intel's highest annual greenhouse gas emissions 
+        for operations. Over subsequent years, Intel invests heavily in 
+        chemical abatement, renewable energy, and energy-efficient 
+        manufacturing to reverse this trend.
+          </p>
+        </div>
+        <div class="flip-card-back card-stage-5">
+          <img src="img/rise.jpg" alt="2020" />
+          <h2>2020</h2>
+          <h3>RISE Strategy</h3>
+          <p class="card-description">
+             Intel launches its RISE (Responsible, Inclusive, Sustainable, 
+        Enabling) strategy and 2030 goals, aiming to drive industry-wide 
+        progress on climate action, water stewardship, and waste reduction.
+          </p>
+        </div>
+        <div class="flip-card-back card-stage-6">
+          <img src="img/wind.jpg" alt="2022" />
+          <h2>2022</h2>
+          <h3>Net-Zero By 2040</h3>
+          <p class="card-description">
+            Intel announces its commitment to achieve net-zero greenhouse 
+        gas emissions (Scope 1 and 2) across its global operations 
+        by 2040, building on years of environmental initiatives.
+          </p>
+        </div>
+        <div class="flip-card-back card-stage-7">
+          <img src="img/energy.jpg" alt="2023" />
+          <h2>2023</h2>
+          <h3>Renewable Electricity</h3>
+          <p class="card-description">
+            The company achieves 99% renewable electricity usage worldwide, 
+        helping to drastically lower carbon emissions and driving progress 
+        toward Intel's long-term sustainability goals.
+          </p>
+        </div>
+        <div class="flip-card-back card-stage-8">
+          <img src="img/green.jpg" alt="2024" />
+          <h2>2024</h2>
+          <h3>Sustainability Summit</h3>
+          <p class="card-description">
+            Intel hosts its first Sustainability Summit, uniting suppliers, 
+        government officials, and industry leaders to collaborate on 
+        next-generation sustainable semiconductor manufacturing.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+  const flipCardInner = document.querySelector('.flip-card-inner');
+  const faces = document.querySelectorAll('.flip-card-back');
+  const body = document.body;
+  const cubeSection = document.querySelector('.cube-section');
+  
+  const maxStep = 8;
+  let cubeStep = 0;
+  let wheelAccum = 0;
+  const wheelThreshold = 60; 
+  let touchStartY = 0;
+  let touchEndY = 0;
+  const swipeThreshold = 40;
+
+  let isLocked = false;
+  const cooldownDuration = 350; 
+
+  function updateCubeStep() {
+    const isMobile = window.innerWidth <= 768;
+
+    if (isMobile) {
+      flipCardInner.style.transform = `rotateX(${cubeStep * 40}deg)`;
+    } else {
+      flipCardInner.style.transform = `rotateY(${-cubeStep * 40}deg)`;
+    }
+
+    faces.forEach((face, index) => {
+      face.classList.toggle('visible', index === cubeStep);
+    });
+  }
+
+  window.addEventListener('resize', updateCubeStep);
+
+  function advanceStep(delta) {
+    if (isLocked) return;
+
+    const oldStep = cubeStep;
+
+    if (delta > 0 && cubeStep < maxStep) {
+      cubeStep += 1;
+    } else if (delta < 0 && cubeStep > 0) {
+      cubeStep -= 1;
+    }
+
+    if (oldStep !== cubeStep) {
+      updateCubeStep();
+      
+      isLocked = true;
+      setTimeout(() => {
+        isLocked = false;
+        wheelAccum = 0;
+      }, cooldownDuration);
+    }
+  }
+
+  updateCubeStep();
+
+  // Attach listener to window, but track context carefully
+  window.addEventListener('wheel', (event) => {
+    // If the card-flip cooldown is active, hold still briefly
+    if (isLocked) {
+      event.preventDefault();
+      return;
+    }
+
+    // Check if the user's mouse pointer is actually hovering over the cube section
+    const rect = cubeSection.getBoundingClientRect();
+    const isHoveringCube = (
+      event.clientX >= rect.left &&
+      event.clientX <= rect.right &&
+      event.clientY >= rect.top &&
+      event.clientY <= rect.bottom
+    );
+
+    // If they aren't even looking at the cube, let the page scroll completely normally
+    if (!isHoveringCube) {
+      return;
+    }
+
+    // --- ESCAPE LOGIC FOR MIDDLE CARDS ---
+    
+    // If scrolling UP and we aren't at the first card, check if we should change cards or scroll the page
+    if (event.deltaY < 0) {
+      if (cubeStep === 0) {
+        // Already at the first card, let the page scroll up to the header naturally
+        return;
+      }
+      // We are on a middle card. Prevent normal page scrolling so we can flip backwards
+      event.preventDefault();
+      wheelAccum += event.deltaY;
+      if (Math.abs(wheelAccum) >= wheelThreshold) {
+        advanceStep(wheelAccum);
+      }
+      return;
+    }
+
+    // If scrolling DOWN
+    if (event.deltaY > 0) {
+      if (cubeStep === maxStep) {
+        // Already at the last card, let the page scroll down naturally
+        return;
+      }
+      // We are on a middle card. Prevent normal page scrolling to flip forward
+      event.preventDefault();
+      wheelAccum += event.deltaY;
+      if (Math.abs(wheelAccum) >= wheelThreshold) {
+        advanceStep(wheelAccum);
+      }
+      return;
+    }
+
+  }, { passive: false });
+
+  // Touch controls 
+  window.addEventListener('touchstart', (event) => {
+    touchStartY = event.touches[0]?.clientY || 0;
+  }, { passive: true });
+
+  window.addEventListener('touchend', (event) => {
+    if (isLocked) return;
+    if (!event.target.closest('.cube-section')) return;
+
+    touchEndY = event.changedTouches[0]?.clientY || 0;
+    const touchDelta = touchStartY - touchEndY;
+
+    if (cubeStep === 0 && touchDelta < 0) return;
+    if (cubeStep === maxStep && touchDelta > 0) return;
+
+    if (Math.abs(touchDelta) >= swipeThreshold) {
+      // Prevent swipe handling from dragging the mobile page while flipping
+      advanceStep(touchDelta);
+    }
+  }, { passive: true });
+</script>
+
+</body>
+</html>
