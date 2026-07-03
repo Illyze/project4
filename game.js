@@ -3,8 +3,7 @@ const timerElement = document.getElementById('timer-display');
 const victoryModal = document.getElementById('victory-screen-modal');
 const modalTimeValue = document.getElementById('modal-time-value');
 
-// --- SOUND EFFECTS CONFIGURATION ---
-// Using a clean, high-quality public winning sound effect chime
+// --- LOCALIZED AUDIO SYSTEM COMPLIANCE INTERACTION ---
 const winSound = new Audio('win.mp3');
 
 let timerInterval;
@@ -62,6 +61,7 @@ function initGridGameBoard() {
     gridElement.innerHTML = '';
     gridTilesData = [];
 
+    // Row 0 Top-cap: Drop Node injection point alignment tracking
     for (let c = 0; c < COLS; c++) {
         const item = document.createElement('div');
         if (c === 0) {
@@ -169,6 +169,7 @@ function initGridGameBoard() {
         }
     }
 
+    // Row 4 Bottom-cap: Target Village House Badge alignment matrix spacer row
     for (let c = 0; c < COLS; c++) {
         const item = document.createElement('div');
         if (c === COLS - 1) {
@@ -259,11 +260,9 @@ function calculatePathFlowNetwork() {
                     victoryModal.classList.add('visible');
                 }
                 
-                // --- TRIGGER WINNING AUDIO PLAYBACK ---
-                winSound.currentTime = 0; // Rewind to start in case of sequential games
-                winSound.play().catch(error => {
-                    console.log("Audio playback delayed until user context interaction map occurs:", error);
-                });
+                // Audio triggers locally to comply with strict modern autoplay mechanisms
+                winSound.currentTime = 0; 
+                winSound.play().catch(err => console.log("Audio block context waiting interface event", err));
                 
             }, 600);
         }
